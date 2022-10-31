@@ -4,12 +4,13 @@ const list = document.querySelector("#list");
 const form = document.querySelector("#new-tweet-form");
 const textarea = document.querySelector("#textarea");
 const submitBtn = document.querySelector(".submit");
-// generate 
+// generate unique ID
 const generateId = () =>
   Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1);
 
+// initial tweet
 const tweets = [
   {
     tweetId: generateId(),
@@ -19,6 +20,7 @@ const tweets = [
   }
 ];
 
+// generate tweet markup
 const createTweets = ({ tweetId, username, text, isLiked }) => {
   const li = document.createElement("li");
   // додаємо унікальний дата трибут
@@ -38,7 +40,6 @@ const createTweets = ({ tweetId, username, text, isLiked }) => {
 
   return li;
 };
-//підписуємося на два інпута і перевіряємо чи є на двох інпутах значення
 
 textarea.addEventListener("input", (e) => {
   const counter = document.querySelector(".counter");
