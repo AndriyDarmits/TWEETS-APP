@@ -124,16 +124,20 @@ var list = document.querySelector("#list");
 var form = document.querySelector("#new-tweet-form");
 var textarea = document.querySelector("#textarea");
 var submitBtn = document.querySelector(".submit");
-// generate 
+// generate unique ID
 var generateId = function generateId() {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 };
+
+// initial tweet
 var tweets = [{
   tweetId: generateId(),
   username: "darmirs99@gmail.com",
   text: "Hey, my little boy",
   isLiked: true
 }];
+
+// generate tweet markup
 var createTweets = function createTweets(_ref) {
   var tweetId = _ref.tweetId,
     username = _ref.username,
@@ -145,8 +149,6 @@ var createTweets = function createTweets(_ref) {
   li.innerHTML = "\n  <i class=\"fa-solid fa-xmark delete-icon\"></i>\n      <p class=\"username\">".concat(username, "</p>\n      <p class=\"tweets\">").concat(text, "</p>\n        <div class=\"buttons\">\n          <a href=\"#\" class=\"like-button ").concat(isLiked ? "like-button-active" : "", "\">\n            <i class=\"fas fa-heart\"></i>\n          </a>\n        </div>\n  ");
   return li;
 };
-//підписуємося на два інпута і перевіряємо чи є на двох інпутах значення
-
 textarea.addEventListener("input", function (e) {
   var counter = document.querySelector(".counter");
   var inputValueLength = e.target.value.length;
@@ -187,9 +189,11 @@ form.addEventListener("submit", function (e) {
 });
 list.addEventListener("click", function (event) {
   event.preventDefault();
-  //!!!! шукаємо найлижчий елемент, який задовльняє вказаний селектер
+
+  // looking for the nearest el which meets specified selector
   var buttonElement = event.target.closest(".like-button");
-  //якщо його знайшли, то переключаємо клас
+
+  // if it was founded - toggle "like-button-active"
   if (buttonElement !== null) {
     buttonElement.classList.toggle("like-button-active");
   }
@@ -200,6 +204,8 @@ list.addEventListener("click", function (event) {
     li.remove();
   }
 });
+
+//get tweets from local storage
 function getTweets() {
   var localTweets = localStorage.getItem("tweets");
   if (localTweets === null) {
@@ -207,17 +213,20 @@ function getTweets() {
   }
   return JSON.parse(localTweets);
 }
+//add tweets to lacal storage
 function saveTweets(tweet) {
   var tweets = getTweets();
   tweets.push(tweet);
   localStorage.setItem("tweets", JSON.stringify(tweets));
 }
+//remove tweets from local storage
 function removeTweets(tweetId) {
   var tweets = getTweets();
   localStorage.setItem("tweets", JSON.stringify(tweets.filter(function (tweet) {
     return tweet.tweetId !== tweetId;
   })));
 }
+// render all page
 var renderTweets = function renderTweets() {
   var tweets = getTweets();
   tweets.forEach(function (tweet) {
