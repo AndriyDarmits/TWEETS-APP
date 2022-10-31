@@ -16,8 +16,8 @@ const tweets = [
     tweetId: generateId(),
     username: "darmirs99@gmail.com",
     text: "Hey, my little boy",
-    isLiked: true
-  }
+    isLiked: true,
+  },
 ];
 
 // generate tweet markup
@@ -68,7 +68,7 @@ form.addEventListener("submit", (e) => {
     tweetId: generateId(),
     username: "darmirs99@gmail.com",
     text: data.get("text"), // по імені поля витягаємо
-    isLiked: false
+    isLiked: false,
   };
   //save added tweet to localstorage
   saveTweets(tweetObj);
@@ -82,9 +82,11 @@ form.addEventListener("submit", (e) => {
 
 list.addEventListener("click", (event) => {
   event.preventDefault();
-  //!!!! шукаємо найлижчий елемент, який задовльняє вказаний селектер
+
+  // looking for the nearest el which meets specified selector
   const buttonElement = event.target.closest(".like-button");
-  //якщо його знайшли, то переключаємо клас
+
+  // if it was founded - toggle "like-button-active"
   if (buttonElement !== null) {
     buttonElement.classList.toggle("like-button-active");
   }
@@ -97,6 +99,7 @@ list.addEventListener("click", (event) => {
   }
 });
 
+//get tweets from local storage
 function getTweets() {
   const localTweets = localStorage.getItem("tweets");
   if (localTweets === null) {
@@ -104,12 +107,13 @@ function getTweets() {
   }
   return JSON.parse(localTweets);
 }
-
+//add tweets to lacal storage
 function saveTweets(tweet) {
   const tweets = getTweets();
   tweets.push(tweet);
   localStorage.setItem("tweets", JSON.stringify(tweets));
 }
+//remove tweets from local storage
 function removeTweets(tweetId) {
   const tweets = getTweets();
   localStorage.setItem(
@@ -117,7 +121,7 @@ function removeTweets(tweetId) {
     JSON.stringify(tweets.filter((tweet) => tweet.tweetId !== tweetId))
   );
 }
-
+// render all page
 const renderTweets = () => {
   const tweets = getTweets();
   tweets.forEach((tweet) => {

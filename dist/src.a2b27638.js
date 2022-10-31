@@ -189,9 +189,11 @@ form.addEventListener("submit", function (e) {
 });
 list.addEventListener("click", function (event) {
   event.preventDefault();
-  //!!!! шукаємо найлижчий елемент, який задовльняє вказаний селектер
+
+  // looking for the nearest el which meets specified selector
   var buttonElement = event.target.closest(".like-button");
-  //якщо його знайшли, то переключаємо клас
+
+  // if it was founded - toggle "like-button-active"
   if (buttonElement !== null) {
     buttonElement.classList.toggle("like-button-active");
   }
@@ -202,6 +204,8 @@ list.addEventListener("click", function (event) {
     li.remove();
   }
 });
+
+//get tweets from local storage
 function getTweets() {
   var localTweets = localStorage.getItem("tweets");
   if (localTweets === null) {
@@ -209,17 +213,20 @@ function getTweets() {
   }
   return JSON.parse(localTweets);
 }
+//add tweets to lacal storage
 function saveTweets(tweet) {
   var tweets = getTweets();
   tweets.push(tweet);
   localStorage.setItem("tweets", JSON.stringify(tweets));
 }
+//remove tweets from local storage
 function removeTweets(tweetId) {
   var tweets = getTweets();
   localStorage.setItem("tweets", JSON.stringify(tweets.filter(function (tweet) {
     return tweet.tweetId !== tweetId;
   })));
 }
+// render all page
 var renderTweets = function renderTweets() {
   var tweets = getTweets();
   tweets.forEach(function (tweet) {
