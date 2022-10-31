@@ -4,7 +4,7 @@ const list = document.querySelector("#list");
 const form = document.querySelector("#new-tweet-form");
 const textarea = document.querySelector("#textarea");
 const submitBtn = document.querySelector(".submit");
-
+// generate 
 const generateId = () =>
   Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
