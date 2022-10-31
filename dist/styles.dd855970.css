@@ -1,0 +1,53 @@
+body {
+  font-family: sans-serif;
+  background-color: rgb(185, 185, 185);
+}
+header {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+#new-tweet-form {
+}
+.submit {
+  border: 1px solid #000;
+}
+#textarea {
+  margin-bottom: 10px;
+  outline: none;
+}
+
+#list {
+  background-color: #fff;
+  border-radius: 5px;
+  padding-left: 0;
+}
+#list > li {
+  position: relative;
+  list-style: none;
+  padding: 5px 10px;
+  box-shadow: 0px 2px 3px #000;
+}
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.like-button {
+  text-decoration: none;
+  color: black;
+}
+.like-button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+.like-button-active {
+  color: rgb(220, 20, 60);
+}
+.like-button-active:hover {
+  color: hsla(348, 83%, 47%, 0.6);
+}
+
+
+/*# sourceMappingURL=/styles.dd855970.css.map */
