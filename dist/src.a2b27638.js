@@ -144,7 +144,7 @@ var createTweets = function createTweets(_ref) {
     text = _ref.text,
     isLiked = _ref.isLiked;
   var li = document.createElement("li");
-  // додаємо унікальний дата трибут
+  // add unique data-id attributes
   li.dataset.tweetId = tweetId;
   li.innerHTML = "\n  <i class=\"fa-solid fa-xmark delete-icon\"></i>\n      <p class=\"username\">".concat(username, "</p>\n      <p class=\"tweets\">").concat(text, "</p>\n        <div class=\"buttons\">\n          <a href=\"#\" class=\"like-button ").concat(isLiked ? "like-button-active" : "", "\">\n            <i class=\"fas fa-heart\"></i>\n          </a>\n        </div>\n  ");
   return li;
@@ -156,9 +156,13 @@ textarea.addEventListener("input", function (e) {
   // increment counter, when typing
   var inputValue = e.target.value;
   if (inputValueLength <= characterLimit) {
+    if (counter.hasAttribute("invalid")) {
+      counter.removeAttribute("invalid");
+    }
     counter.style.color = "";
   } else {
     counter.style.color = "red";
+    counter.setAttribute("invalid", true);
   }
   counter.textContent = "".concat(inputValueLength, "/").concat(characterLimit);
   // if field is empty -disable button
@@ -259,7 +263,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35877" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
