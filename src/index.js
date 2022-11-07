@@ -23,7 +23,7 @@ const tweets = [
 // generate tweet markup
 const createTweets = ({ tweetId, username, text, isLiked }) => {
   const li = document.createElement("li");
-  // додаємо унікальний дата трибут
+  // add unique data-id attributes
   li.dataset.tweetId = tweetId;
   li.innerHTML = `
   <i class="fa-solid fa-xmark delete-icon"></i>
@@ -48,9 +48,13 @@ textarea.addEventListener("input", (e) => {
   // increment counter, when typing
   const inputValue = e.target.value;
   if (inputValueLength <= characterLimit) {
+    if (counter.hasAttribute("invalid")) {
+      counter.removeAttribute("invalid");
+    }
     counter.style.color = "";
   } else {
     counter.style.color = "red";
+    counter.setAttribute("invalid", true);
   }
   counter.textContent = `${inputValueLength}/${characterLimit}`;
   // if field is empty -disable button
